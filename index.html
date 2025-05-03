@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz – Giornata del Ricordo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .question {
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    #result {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Quiz – Giornata del Ricordo</h1>
+<form id="quizForm">
+
+  <!-- 1 -->
+  <div class="question">
+    <p>1. Che cosa si ricorda nella Giornata del Ricordo?</p>
+    <label><input type="radio" name="q1" value="C"> L’unità d’Italia</label><br>
+    <label><input type="radio" name="q1" value="A"> Le vittime delle foibe e l’esodo giuliano-dalmata</label><br>
+    <label><input type="radio" name="q1" value="B"> I caduti della Prima guerra mondiale</label><br>
+  </div>
+
+  <!-- 2 -->
+  <div class="question">
+    <p>2. Cosa sono le foibe?</p>
+    <label><input type="radio" name="q2" value="B"> Cavità carsiche usate per nascondere i cadaveri di vittime delle violenze politiche</label><br>
+    <label><input type="radio" name="q2" value="A"> Caverne turistiche del Friuli</label><br>
+    <label><input type="radio" name="q2" value="C"> Trincee della Prima guerra mondiale</label><br>
+  </div>
+
+  <!-- 3 -->
+  <div class="question">
+    <p>3. In che anno è stata istituita la Giornata del Ricordo?</p>
+    <label><input type="radio" name="q3" value="B"> 1991</label><br>
+    <label><input type="radio" name="q3" value="A"> 1947</label><br>
+    <label><input type="radio" name="q3" value="C"> 2004</label><br>
+  </div>
+
+  <!-- 4 -->
+  <div class="question">
+    <p>4. Cosa successe al confine orientale tra il 1943 e il 1947?</p>
+    <label><input type="radio" name="q4" value="A"> Fu occupato dai tedeschi e poi restituito all’Austria</label><br>
+    <label><input type="radio" name="q4" value="B"> Passò sotto il controllo jugoslavo e vi furono violenze e deportazioni contro gli italiani</label><br>
+    <label><input type="radio" name="q4" value="C"> Rimase zona neutrale senza scontri</label><br>
+  </div>
+
+  <!-- 5 -->
+  <div class="question">
+    <p>5. Quale città italiana ospita il monumento nazionale alla Foiba di Basovizza?</p>
+    <label><input type="radio" name="q5" value="A"> Gorizia</label><br>
+    <label><input type="radio" name="q5" value="B"> Roma</label><br>
+    <label><input type="radio" name="q5" value="C"> Trieste</label><br>
+  </div>
+
+  <!-- 6 -->
+  <div class="question">
+    <p>6. Quale luogo è stato usato come campo di concentramento nazista a Trieste?</p>
+    <label><input type="radio" name="q6" value="B"> Castello di Miramare</label><br>
+    <label><input type="radio" name="q6" value="A"> Risiera di San Sabba</label><br>
+    <label><input type="radio" name="q6" value="C"> Foiba di Basovizza</label><br>
+  </div>
+
+  <!-- 7 -->
+  <div class="question">
+    <p>7. Qual è il nome della piazza principale affacciata sul mare a Trieste, simbolo dell'identità italiana della città?</p>
+    <label><input type="radio" name="q7" value="B"> Piazza Unità d’Italia</label><br>
+    <label><input type="radio" name="q7" value="A"> Piazza del Popolo</label><br>
+    <label><input type="radio" name="q7" value="C"> Piazza della Repubblica</label><br>
+  </div>
+
+  <!-- 8 -->
+  <div class="question">
+    <p>8. Quale celebre scrittore irlandese ha vissuto a lungo a Trieste e vi ha ambientato parte delle sue opere?</p>
+    <label><input type="radio" name="q8" value="B"> James Joyce</label><br>
+    <label><input type="radio" name="q8" value="A"> Oscar Wilde</label><br>
+    <label><input type="radio" name="q8" value="C"> Samuel Beckett</label><br>
+  </div>
+
+  <!-- 9 -->
+  <div class="question">
+    <p>9. Chi fece costruire il Castello di Miramare a Trieste?</p>
+    <label><input type="radio" name="q9" value="B"> Francesco Giuseppe d'Austria</label><br>
+    <label><input type="radio" name="q9" value="A"> Massimiliano d’Asburgo</label><br>
+    <label><input type="radio" name="q9" value="C"> Napoleone Bonaparte</label><br>
+  </div>
+
+  <button type="button" onclick="calcolaRisultato()">Invia le risposte</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+  function calcolaRisultato() {
+    const risposteCorrette = {
+      q1: "A",
+      q2: "B",
+      q3: "C",
+      q4: "B",
+      q5: "C",
+      q6: "A",
+      q7: "B",
+      q8: "B",
+      q9: "A"
+    };
+
+    let punteggio = 0;
+    for (let q in risposteCorrette) {
+      const risposta = document.querySelector(`input[name="${q}"]:checked`);
+      if (risposta && risposta.value === risposteCorrette[q]) {
+        punteggio++;
+      }
+    }
+
+    const risultato = document.getElementById("result");
+    risultato.innerHTML = `Hai totalizzato <strong>${punteggio}/9</strong> risposte corrette.`;
+  }
+</script>
+
+</body>
+</html>
